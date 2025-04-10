@@ -1,0 +1,70 @@
+= Employee Service
+Nemanja <jovnem89@gmail.com>
+v1.0, 2025-04-10
+:toc:
+:toclevels: 2
+
+== Overview
+
+The Employee Service is a CRUD REST API for managing employees and their team associations.
+It leverages modern containerized development practices and integrates with PostgreSQL for data persistence.
+The application is built using Java 21, Maven and runs on a dockerized PostgreSQL instance.
+
+== Requirements
+
+To run this app you need:
+- **Java 21**
+- **Maven**
+- **Podman** or **Docker Desktop**
+
+== Integration Testing
+
+The integration tests use:
+- [Testcontainers](https://www.testcontainers.org) to start PostgreSQL in a container.
+- A dockerized PostgreSQL instance for integration testing.
+- The service itself uses a dockerized PostgreSQL instance for local usage (accessible at `localhost:8080`).
+
+== API Documentation
+
+Once the application is running, API documentation is available at:
+
+  http://localhost:8080/swagger-ui/index.html
+
+== Building and Running the Application
+
+The application uses the Spring Maven plugin for image creation as part of the build process.
+
+Make commands are available to use the app. Follow these steps:
+
+1. Navigate to the root of the project where the Makefile resides.
+2. Run the following commands as needed:
+
+* Build the Docker image:
+```
+make build
+```
+
+* Start the containers:
+```
+make up
+```
+
+* Stop and remove the containers:
+```
+make down
+```
+
+* Clean up leftover containers:
+```
+make clean-ryuk
+```
+
+    The `make clean-ryuk` command is used to delete any leftover containers after the integration tests are run. This is particularly useful when using Podman, as sometimes the ryuk container is not destroyed automatically due to a Podman issue.
+
+== Usage
+
+After starting the containers, the service will be available at:
+
+  http://localhost:8080
+
+You can interact with the API using any REST client or directly via the Swagger UI as mentioned above.
